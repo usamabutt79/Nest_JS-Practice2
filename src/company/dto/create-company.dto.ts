@@ -1,6 +1,6 @@
 export class CreateCompanyDto{
-    emp_Name: string;
-    emp_Garede: number;
-    emp_Salary: number;
-    emp_Contact: string;
+    emp_name: string;
+    emp_garede: number;
+    emp_salary: number;
+    emp_contact: string;
 }

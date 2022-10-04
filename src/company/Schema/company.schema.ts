@@ -6,7 +6,7 @@ export type CompanyDocument = Company & Document
 @Schema()
 export class Company{
 
-@Prop()
+@Prop({required:true})
 emp_name: string;
 
 @Prop()
