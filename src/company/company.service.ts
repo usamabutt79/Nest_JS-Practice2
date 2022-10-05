@@ -13,4 +13,26 @@ export class CompanyService {
         const employee = await this.CompanyModel.create(empdata);
         return employee
     }
+
+    async getAllEmployee(){
+        return this.CompanyModel.find()
+    }
+
+    async findOne(id: string){
+        return await this.CompanyModel.findById(id);
+    }
+
+    async updateEmployee({emp_name,emp_grade,emp_contact,emp_salary}: CreateCompanyDto){
+        const update=await this.CompanyModel.findOneAndUpdate({emp_name},{emp_name,emp_grade,emp_contact,emp_salary})
+        return await this.findOne(update?._id)
+    }
+
+    async deleteEmployee(id: string){
+        const deleteEmp = await this.CompanyModel.findByIdAndDelete(id);
+        return deleteEmp;
+    }
+
+    async deleteAllEmployee(){
+        return await this.CompanyModel.deleteMany();
+    }
 }

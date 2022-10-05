@@ -9,7 +9,7 @@ export class Company{
 @Prop({required:true})
 emp_name: string;
 
-@Prop()
+@Prop({default:0})
 emp_grade: number;
 
 @Prop()
