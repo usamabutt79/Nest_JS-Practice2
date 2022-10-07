@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, HttpException, HttpStatus } from '@nestjs/common';
 import { Body, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common/decorators';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
@@ -11,7 +11,15 @@ export class CompanyController {
 
   @Post('addEmployee')
   async addData(@Body() CreateCompanyDto: CreateCompanyDto){
-    return await this.companyService.addEmploye(CreateCompanyDto)
+    try{
+    const u=await this.companyService.addEmploye(CreateCompanyDto)
+    return u
+    }
+    catch(e){
+      console.error(e);
+      return e?.message;
+      
+    }
   }
 
   @Get('getAllEmployee')
