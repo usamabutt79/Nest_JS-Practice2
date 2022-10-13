@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateCompanyDto } from './dto/create-company.dto';
-import { Company, CompanyDocument } from './Schema/company.schema';
+import { CreateEmployeeDto } from './dto/create-employee.dto';
+import { Employee, EmployeeDocument } from './Schema/employee.schema';
 
 @Injectable()
 export class CompanyService {
 
-    constructor(@InjectModel(Company.name) private CompanyModel: Model<CompanyDocument>) {}
+    constructor(@InjectModel(Employee.name) private CompanyModel: Model<EmployeeDocument>) {}
 
-    async addEmploye(empdata: CreateCompanyDto){
+    async addEmploye(empdata: CreateEmployeeDto){
         const employee = await this.CompanyModel.create(empdata);
         return employee
     }
@@ -22,7 +22,15 @@ export class CompanyService {
         return await this.CompanyModel.findById(id);
     }
 
-    async updateEmployee({emp_name,emp_grade,emp_contact,emp_salary}: CreateCompanyDto){
+    async findWithQuery(){
+        return await this.CompanyModel.find({emp_name: "Usama Aslam Butt",emp_grade: { $gt: 20 }});
+    }
+
+    async updateWithQuery(id:string){
+        return await this.CompanyModel.findByIdAndUpdate(id, {emp_name: "Muhammad Bilal"})
+    }
+
+    async updateEmployee({emp_name,emp_grade,emp_contact,emp_salary}: CreateEmployeeDto){
         const update=await this.CompanyModel.findOneAndUpdate({emp_name},{emp_name,emp_grade,emp_contact,emp_salary})
         return await this.findOne(update?._id)
     }
