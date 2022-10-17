@@ -5,7 +5,7 @@ import { Company } from './company.schema';
 export type EmployeeDocument = Employee & Document
 
 @Schema()
-export class Employee{
+export class Employee extends Document{
 
 @Prop({required:true, unique:true, maxlength:20, minlength:8})
 emp_name: string;
@@ -20,7 +20,7 @@ emp_salary: number;
 emp_contact: string;
 
 @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Company'})
-company: Company
+Company: Company
 
 }
 
