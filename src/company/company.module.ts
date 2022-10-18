@@ -8,7 +8,7 @@ import { Company, CompanySchema } from './Schema/company.schema';
 import { Employee, EmployeeSchema } from './Schema/employee.schema';
 
 @Module({
-    imports: [MongooseModule.forFeature([{name: Employee.name, schema: EmployeeSchema},{name: Company.name, schema: CompanySchema}])],
+  imports: [MongooseModule.forFeature([{name: Employee.name, schema: EmployeeSchema},{name: Company.name, schema: CompanySchema}])],
   controllers: [CompanyController],
   providers: [CompanyService]
 })
